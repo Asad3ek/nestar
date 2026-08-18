@@ -20,8 +20,8 @@ export class MemberService {
             return result
         }
         catch (err) {
-            console.log("ERROR, signUp", err)
-            throw new BadRequestException(err)
+            console.log("ERROR, signUp", err.message)
+            throw new BadRequestException(Message.USED_NICK_OR_PHONE)
         }
 
     }

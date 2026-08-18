@@ -10,39 +10,26 @@ export class MemberResolver {
 
     @Mutation(() => Member)
     public async signUp(@Args("input") input: MemberInput): Promise<Member> {
-        try {
-            console.log("Mutation signUp");
-            console.log("input: ", input);
-            return this.memberService.signUp(input);
-        }
-        catch (err) {
-            console.log("ERROR, signUp: ", err);
-            throw new InternalServerErrorException(err);
-        }
+
+        console.log("Mutation signUp");
+        console.log("input: ", input);
+        return this.memberService.signUp(input);
+
     }
 
     @Mutation(() => Member)
     public async login(@Args("input") input: LoginInput): Promise<Member> {
-        try {
-            console.log("Mutation login");
-            return this.memberService.login(input);
-        }
-        catch (err) {
-            console.log("ERROR, login: ", err);
-            throw new InternalServerErrorException(err);
-        }
+
+        console.log("Mutation login");
+        return this.memberService.login(input);
     }
 
     @Mutation(() => String)
     public async updateMember(): Promise<string> {
-        try {
-            console.log("Mutation updateMember");
-            return this.memberService.UpdateMember();
-        }
-        catch (err) {
-            console.log("ERROR, UpdateMember: ", err);
-            throw new InternalServerErrorException(err);
-        }
+
+        console.log("Mutation updateMember");
+        return this.memberService.UpdateMember();
+
     }
 
 
