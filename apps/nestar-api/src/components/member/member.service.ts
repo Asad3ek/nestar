@@ -3,17 +3,21 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Member } from '../../libs/dto/member/member';
 import { LoginInput, MemberInput } from '../../libs/dto/member/member.input';
-import { exec } from 'child_process';
 import { MemberStatus } from '../../libs/enums/member.enum';
 import { Message } from '../../libs/enums/common.enum';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class MemberService {
 
-    constructor(@InjectModel("Member") private readonly memberModel: Model<Member>) { }
+    constructor(
+        @InjectModel("Member") private readonly memberModel: Model<Member>,
+        private authService: AuthService
+    ) { }
 
     public async signUp(input: MemberInput): Promise<Member> {
         //TODO: HASH Password
+        input.memberPassword = await this.authService.hashPassword(input.memberPassword)
         try {
             //TODO: Auth via tokens
             const result = await this.memberModel.create(input);
@@ -41,7 +45,7 @@ export class MemberService {
             }
 
             //TODO: Compare Password
-            const isMatch = input.memberPassword === response.memberPassword;
+            const isMatch = await this.authService.comparePassword(input.memberPassword, response.memberPassword)
             if (!isMatch) {
                 throw new InternalServerErrorException(Message.WRONG_PASSWORD)
             }
