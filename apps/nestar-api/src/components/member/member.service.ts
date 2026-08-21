@@ -30,32 +30,27 @@ export class MemberService {
     }
 
     public async login(input: LoginInput): Promise<Member> {
-        try {
-            const { memberNick, memberPassword } = input
-            const response: Member = await this.memberModel
-                .findOne({ memberNick: memberNick })
-                .select("+memberPassword")
-                .exec();
 
-            if (!response || response.memberStatus === MemberStatus.DELETE) {
-                throw new InternalServerErrorException(Message.NO_MEMBER_NICK)
-            } else if (response.memberStatus === MemberStatus.BLOCK) {
-                throw new InternalServerErrorException(Message.BLOCKED_USER)
-            }
+        const { memberNick, memberPassword } = input
+        const response: Member = await this.memberModel
+            .findOne({ memberNick: memberNick })
+            .select("+memberPassword")
+            .exec();
 
-            const isMatch = await this.authService.comparePassword(input.memberPassword, response.memberPassword)
-            if (!isMatch) {
-                throw new InternalServerErrorException(Message.WRONG_PASSWORD)
-            }
-            response.accessToken = await this.authService.createToken(response)
-
-            return response;
+        if (!response || response.memberStatus === MemberStatus.DELETE) {
+            throw new InternalServerErrorException(Message.NO_MEMBER_NICK)
+        } else if (response.memberStatus === MemberStatus.BLOCK) {
+            throw new InternalServerErrorException(Message.BLOCKED_USER)
         }
-        catch (err) {
-            console.log("ERROR, login", err)
-            throw new BadRequestException(err)
-        }
+
+        const isMatch = await this.authService.comparePassword(input.memberPassword, response.memberPassword)
+        if (!isMatch) throw new InternalServerErrorException(Message.WRONG_PASSWORD)
+
+        response.accessToken = await this.authService.createToken(response);
+
+        return response;
     }
+
 
     public async getMember(): Promise<string> {
         return "GetMember Executed!"

@@ -25,10 +25,10 @@ export class MemberResolver {
 
     @Mutation(() => Member)
     public async login(@Args("input") input: LoginInput): Promise<Member> {
-
         console.log("Mutation login");
         return this.memberService.login(input);
     }
+
     @UseGuards(AuthGuard)
     @Mutation(() => String)
     public async updateMember(@AuthMember("_id") memberId: ObjectId): Promise<string> {
