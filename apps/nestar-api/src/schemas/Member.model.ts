@@ -65,12 +65,12 @@ const MemberSchema = new Schema({
         default: 0,
     },
 
-    memberFollwers: {
+    memberFollowers: {
         type: Number,
         default: 0,
     },
 
-    memberFollowing: {
+    memberFollowings: {
         type: Number,
         default: 0,
     },
@@ -90,7 +90,7 @@ const MemberSchema = new Schema({
         default: 0,
     },
 
-    memberRanks: {
+    memberRank: {
         type: Number,
         default: 0,
     },
@@ -107,7 +107,7 @@ const MemberSchema = new Schema({
         default: 0,
     },
 
-    memberBloks: {
+    memberBlocks: {
         type: Number,
         default: 0,
     },

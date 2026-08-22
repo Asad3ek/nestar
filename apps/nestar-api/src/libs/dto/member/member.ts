@@ -44,10 +44,16 @@ export class Member {
     memberArticles?: number
 
     @Field(() => Int)
-    memberFollwers?: number
+    memberFollowers?: number
 
     @Field(() => Int)
-    memberFollowing?: number
+    memberFollowings?: number
+
+    @Field(() => Int)
+    memberRank?: number
+
+    @Field(() => Int)
+    memberBlocks?: number
 
     @Field(() => Int)
     memberPoints?: number
@@ -59,16 +65,10 @@ export class Member {
     memberViews?: number
 
     @Field(() => Int)
-    memberRanks?: number
-
-    @Field(() => Int)
     memberWarnings?: number
 
     @Field(() => Int)
     memberComments?: number
-
-    @Field(() => Int)
-    memberBloks?: number
 
     @Field(() => Date, { nullable: true })
     deletedAt: Date;
