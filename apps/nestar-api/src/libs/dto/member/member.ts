@@ -43,31 +43,31 @@ export class Member {
     @Field(() => Int)
     memberArticles?: number
 
-    @Field(() => Int)
+    @Field(() => Int, { defaultValue: 0 })
     memberFollowers?: number
 
-    @Field(() => Int)
+    @Field(() => Int, { defaultValue: 0 })
     memberFollowings?: number
 
-    @Field(() => Int)
+    @Field(() => Int, { defaultValue: 0 })
     memberRank?: number
 
-    @Field(() => Int)
+    @Field(() => Int, { defaultValue: 0 })
     memberBlocks?: number
 
-    @Field(() => Int)
+    @Field(() => Int, { defaultValue: 0 })
     memberPoints?: number
 
-    @Field(() => Int)
+    @Field(() => Int, { defaultValue: 0 })
     memberLikes?: number
 
-    @Field(() => Int)
+    @Field(() => Int, { defaultValue: 0 })
     memberViews?: number
 
-    @Field(() => Int)
+    @Field(() => Int, { defaultValue: 0 })
     memberWarnings?: number
 
-    @Field(() => Int)
+    @Field(() => Int, { defaultValue: 0 })
     memberComments?: number
 
     @Field(() => Date, { nullable: true })
