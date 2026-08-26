@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from "bcryptjs"
 import { T } from '../../libs/types/common';
 import { Member } from '../../libs/dto/member/member';
 import { shapeIntoMongoObjectId } from '../../libs/config';
+import { Message } from '../../libs/enums/common.enum';
 
 @Injectable()
 export class AuthService {
@@ -30,9 +31,14 @@ export class AuthService {
     }
 
     public async verifyToken(token: string): Promise<Member> {
-        const member = await this.jwtService.verifyAsync(token);
-        member._id = shapeIntoMongoObjectId(member._id)
-        return member
+        try {
+            const member = await this.jwtService.verifyAsync(token);
+            member._id = shapeIntoMongoObjectId(member._id);
+            return member;
+        } catch (err) {
+            console.error('JWT Verification error:', err.message);
+            throw new UnauthorizedException(Message.NOT_AUTHENTICATED);
+        }
     }
 }
 
