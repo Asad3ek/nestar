@@ -174,6 +174,7 @@ export class BoardArticleService {
     }
 
 
+
     public async removeBoardArticleByAdmin(articleId: ObjectId): Promise<BoardArticle> {
         const search: T = { _id: articleId, articleStatus: BoardArticleStatus.DELETE };
         const result = await this.boardArticleModel.findOneAndDelete(search).exec();
