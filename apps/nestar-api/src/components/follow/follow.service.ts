@@ -12,6 +12,7 @@ import { T } from '../../libs/types/common';
 export class FollowService {
     constructor(
         @InjectModel("Follow") private readonly followModel: Model<Following | Follower>,
+
         private readonly memberService: MemberService
     ) { }
 
