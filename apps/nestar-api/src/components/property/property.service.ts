@@ -22,6 +22,7 @@ export class PropertyService {
         private memberService: MemberService,
         private viewService: ViewService,
         private likeService: LikeService
+
     ) { }
 
     public async createProperty(input: PropertyInput): Promise<Property> {
