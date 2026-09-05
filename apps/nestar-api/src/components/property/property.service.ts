@@ -212,6 +212,10 @@ export class PropertyService {
         return await this.likeService.getFavoriteProperties(memberId, input)
     }
 
+    public async getVisited(memberId: ObjectId, input: OrdinaryInquires): Promise<Properties> {
+        return await this.viewService.getVisitedProperties(memberId, input)
+    }
+
 
 
     public async getAgentProperties(memberId: ObjectId, input: AgentPropertiesInquiry): Promise<Properties> {
