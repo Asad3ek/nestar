@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model, ObjectId } from 'mongoose';
 import { Direction, Message } from '../../libs/enums/common.enum';
 import { Properties, Property } from '../../libs/dto/property/property';
-import { AgentPropertiesInquiry, AllPropertiesInquiry, PropertiesInquiry, PropertyInput } from '../../libs/dto/property/property.input';
+import { AgentPropertiesInquiry, AllPropertiesInquiry, OrdinaryInquires, PropertiesInquiry, PropertyInput } from '../../libs/dto/property/property.input';
 import { MemberService } from '../member/member.service';
 import { PropertyStatus } from '../../libs/enums/property.enum';
 import { StatisticModifier, T } from '../../libs/types/common';
@@ -205,6 +205,11 @@ export class PropertyService {
                 return { [ele]: true };
             });
         }
+    }
+
+
+    public async getFavorites(memberId: ObjectId, input: OrdinaryInquires): Promise<Properties> {
+        return await this.likeService.getFavoriteProperties(memberId, input)
     }
 
 
