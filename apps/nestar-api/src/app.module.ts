@@ -8,6 +8,7 @@ import { ApolloDriver } from '@nestjs/apollo'
 import { ComponentsModule } from './components/components.module';
 import { DatabaseModule } from './database/database.module';
 import { T } from './libs/types/common';
+import { SocketModule } from './socket/socket.module';
 
 
 @Module({
@@ -35,7 +36,8 @@ import { T } from './libs/types/common';
       },
     }),
     ComponentsModule,
-    DatabaseModule
+    DatabaseModule,
+    SocketModule
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver],
